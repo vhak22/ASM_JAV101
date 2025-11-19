@@ -1,13 +1,7 @@
 ﻿-- Chỉnh tên database nếu cần
 CREATE DATABASE JAV101;
+go
 USE JAV101;
-GO
-
--- Xóa bảng theo thứ tự phụ thuộc (nếu đã tồn tại)
-IF OBJECT_ID('dbo.Newsletters', 'U') IS NOT NULL DROP TABLE dbo.Newsletters;
-IF OBJECT_ID('dbo.News', 'U') IS NOT NULL DROP TABLE dbo.News;
-IF OBJECT_ID('dbo.Users', 'U') IS NOT NULL DROP TABLE dbo.Users;
-IF OBJECT_ID('dbo.Categories', 'U') IS NOT NULL DROP TABLE dbo.Categories;
 GO
 
 -- =========================
@@ -132,63 +126,3 @@ SELECT * FROM Newsletters;
 
 
 
--- CÁC TRIGGER HỖ TRỢ -- VĨNH KHÁNH 16/11/25 (CHƯA CHẠY)
-
-
--- =========================
--- View hỗ trợ: 5 tin hot nhất và 5 tin mới nhất
--- =========================
-IF OBJECT_ID('dbo.vTop5Hot') IS NOT NULL DROP VIEW dbo.vTop5Hot;
-GO
-CREATE VIEW dbo.vTop5Hot AS
-SELECT TOP 5 Id, Title, Image, PostedDate, Author, ViewCount, CategoryId
-FROM dbo.News
-WHERE IsActive = 1
-ORDER BY ViewCount DESC, PostedDate DESC;
-GO
-
-IF OBJECT_ID('dbo.vTop5Latest') IS NOT NULL DROP VIEW dbo.vTop5Latest;
-GO
-CREATE VIEW dbo.vTop5Latest AS
-SELECT TOP 5 Id, Title, Image, PostedDate, Author, ViewCount, CategoryId
-FROM dbo.News
-WHERE IsActive = 1
-ORDER BY PostedDate DESC;
-GO
-
--- =========================
--- Gợi ý: trigger tăng ViewCount khi đọc chi tiết (ví dụ)
--- =========================
-IF OBJECT_ID('dbo.trg_IncreaseViewOnRead', 'TR') IS NOT NULL DROP TRIGGER dbo.trg_IncreaseViewOnRead;
-GO
--- Trigger này chỉ là ví dụ minh họa; thực tế tăng view nên được xử lý bởi ứng dụng hoặc một stored proc
--- (Trigger dưới đây giả định có một bảng tạm gọi là NewsReadEvents được ứng dụng dùng để đếm lần đọc)
--- Tạo bảng sự kiện nếu cần (không bắt buộc)
-IF OBJECT_ID('dbo.NewsReadEvents', 'U') IS NULL
-BEGIN
-    CREATE TABLE dbo.NewsReadEvents (
-        EventId     INT IDENTITY(1,1) PRIMARY KEY,
-        NewsId      NVARCHAR(50) NOT NULL,
-        ReadAt      DATETIME NOT NULL DEFAULT GETDATE()
-    );
-END
-GO
-
--- Trigger khi có dòng mới trong NewsReadEvents thì cộng viewcount
-CREATE TRIGGER dbo.trg_IncreaseViewOnRead
-ON dbo.NewsReadEvents
-AFTER INSERT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    UPDATE n
-    SET n.ViewCount = n.ViewCount + cnt.c
-    FROM dbo.News n
-    INNER JOIN (
-        SELECT NewsId, COUNT(*) AS c
-        FROM inserted
-        GROUP BY NewsId
-    ) AS cnt ON n.Id = cnt.NewsId;
-END;
-GO
