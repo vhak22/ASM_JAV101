@@ -12,5 +12,5 @@ public interface CrudDAO<T, ID> {
 
     T findById(ID id);
 
-    // T findByUsername(String username);
+
 }
