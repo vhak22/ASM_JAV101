@@ -1,0 +1,468 @@
+/*
+================================================
+  BASE & UTILITIES
+================================================
+*/
+body {
+    margin: 0;
+    padding: 0;
+    background: #FFF6F2;
+    /* Giữ font-family nhất quán từ index.jsp/header.jsp/footer.jsp/login.jsp */
+    font-family: 'Inter', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #D93A20;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+/* Kiểu liên kết chung (từ register.jsp) */
+a {
+    color: #D93A20;
+    text-decoration: none;
+}
+
+/*
+================================================
+  HEADER & NAVIGATION
+================================================
+*/
+
+/* 1. Generic Header Tag (từ detail.jsp, contact.jsp, category.jsp) */
+header {
+    background: #D93A20;
+    padding: 15px;
+    color: white;
+}
+
+/* 2. Main Header Component (từ header.jsp) */
+.header {
+    background: #D93A20;
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.nav a {
+    color: #fff;
+    margin-left: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav a:hover {
+    opacity: 0.75;
+}
+
+.nav span {
+    margin-left: 20px;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+
+/*
+================================================
+  CONTAINERS (Đã tách biệt để tránh xung đột)
+================================================
+*/
+
+/* 1. MAIN LAYOUT CONTAINER (index.jsp & categoryList.jsp) */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    gap: 30px;
+    padding: 0 20px; /* Thêm padding ngang để nội dung không dính sát mép */
+}
+
+/* 2. DETAIL PAGE CONTAINER (dành cho detail.jsp) */
+.detail-container {
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff; /* Thêm nền để tách biệt nếu cần */
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+/* 3. CATEGORY LIST CONTAINER (dành cho category.jsp) */
+.category-container {
+    width: 1100px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* 4. CONTACT FORM CONTAINER (dành cho contact.jsp) */
+.contact-container {
+    width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* 5. REGISTER FORM CONTAINER (dành cho register.jsp) */
+.register-container {
+    width: 420px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* 6. LOGIN FORM CONTAINER (dành cho login.jsp) */
+.login-container { /* Giữ nguyên vì đã có trong login.jsp */
+    width: 100%;
+    max-width: 430px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* 7. ADMIN FORM CONTAINER (dành cho category-form.jsp) */
+.form-container { /* Giữ nguyên vì đã có trong category-form.jsp */
+    max-width: 600px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px 35px;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+.form-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #D93A20;
+    margin-bottom: 25px;
+}
+
+
+/*
+================================================
+  LAYOUT COMPONENTS (Từ index.jsp & categoryList.jsp)
+================================================
+*/
+.left {
+    flex: 3;
+}
+
+.sidebar {
+    flex: 1.2;
+}
+
+/* SECTION BOXES (sidebar components) */
+.box {
+    background: #FFF1EB;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.box h1, .box h3 {
+    color: #D93A20;
+    margin-top: 0;
+}
+
+/* LIST WRAPPER */
+.detail-box {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
+
+.post-list {
+    max-height: 447px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* CARD BÀI VIẾT (từ index.jsp) */
+.post-box {
+    background: #FFFFFF;
+    display: flex;
+    gap: 20px;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    transition: 0.2s;
+    margin-bottom: 15px; /* Thêm khoảng cách giữa các post-box */
+}
+
+.post-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.post-img {
+    width: 180px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #F5F5F5;
+}
+
+.post-info {
+    flex: 1;
+}
+
+/*
+================================================
+  DETAIL PAGE STYLE (Từ detail.jsp)
+================================================
+*/
+.title {
+    color: #D93A20;
+    font-size: 28px;
+}
+
+.news-img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+p.content {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/*
+================================================
+  CATEGORY LIST ITEM STYLE (Từ category.jsp)
+================================================
+*/
+.news-item {
+    display: flex;
+    gap: 15px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.news-item img {
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.news-item h3 {
+    margin: 0;
+    color: #D93A20;
+}
+
+.news-item p {
+    margin: 5px 0;
+}
+
+
+/*
+================================================
+  FORMS & INPUTS
+================================================
+*/
+
+/* FORM GROUP & LABEL */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* INPUT & TEXTAREA STANDARDIZATION */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    /* Dùng style input từ category-form.jsp/login.jsp */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s;
+    box-sizing: border-box; /* Quan trọng để padding không làm tăng chiều rộng */
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* INPUT FOCUS */
+input:focus, textarea:focus {
+    border-color: #D93A20;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(217,58,32,0.2);
+}
+
+/* BUTTONS */
+.btn, .btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #D93A20;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn:hover, .btn-login:hover {
+    background: #FF6A3D;
+}
+
+/* Contact Page Button (Dùng button tag, override style) */
+.contact-container button {
+    background: #FF6A3D;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: auto; /* Không chiếm full width */
+}
+.contact-container button:hover {
+    background: #D93A20;
+}
+
+/* Newsletter form (index.jsp/categoryList.jsp) */
+.newsletter {
+    background: #FFE6DE;
+    padding: 30px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+.newsletter input {
+    /* Override standard input margin */
+    margin: 8px 0 10px;
+    border-radius: 8px;
+}
+.newsletter button {
+    margin-top: 10px;
+    padding: 10px 25px;
+    background: #D93A20;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    width: auto;
+}
+
+/* Admin Form Buttons (category-form.jsp) */
+.btn-save {
+    background: #D93A20;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-save:hover { opacity: 0.85; }
+
+.btn-back {
+    background: #ccc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    margin-left: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.btn-back:hover { background: #bcbcbc; }
+
+/*
+================================================
+  MESSAGES & NOTES
+================================================
+*/
+.error { /* Từ login.jsp */
+    background: #ffe1e1;
+    padding: 10px;
+    border-left: 4px solid #e60000;
+    margin-bottom: 18px;
+    color: #b30000;
+    border-radius: 6px;
+}
+.msg { /* Từ register.jsp */
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.note { /* Từ login.jsp */
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    font-size: 14px;
+}
+.link { /* Từ register.jsp */
+    text-align: center;
+    margin-top: 12px;
+}
+
+/*
+================================================
+  FOOTER
+================================================
+*/
+footer {
+    background: #1F1F1F;
+    color: #fff;
+    padding: 40px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.footer-block h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.footer-block p {
+    margin: 6px 0;
+    opacity: 0.85;
+    font-size: 15px;
+}
+
+.footer-block p:hover {
+    opacity: 1;
+}
