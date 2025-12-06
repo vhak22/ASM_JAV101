@@ -74,17 +74,17 @@ input, select {
 
     <div class="form-title">
         <c:choose>
-            <c:when test="${empty user}">➕ Thêm người dùng</c:when>
+            <c:when test="${empty add}">➕ Thêm người dùng</c:when>
             <c:otherwise>✏️ Sửa người dùng</c:otherwise>
         </c:choose>
     </div>
 
     <form method="post" action="${pageContext.request.contextPath}/admin/user">
-        <input type="hidden" name="action" value="${empty user ? 'add' : 'update'}">
-
+        <input type="hidden" name="action" value="${empty add ? 'add' : 'update'}">
+		
         <!-- ID -->
         <label>ID</label>
-        <input type="text" name="id" value="${user.id}" ${empty user ? "" : "readonly"} required>
+        <input type="text" name="id" value="${user.id}" ${empty add ? "" : "readonly"} required>
 
         <!-- Fullname -->
         <label>Họ và tên</label>
@@ -123,8 +123,11 @@ input, select {
             <option value="true"  ${user.role ? "selected" : ""}>Admin</option>
             <option value="false" ${!user.role ? "selected" : ""}>Reporter</option>
         </select>
-
-        <button class="btn-save">Lưu</button>
+		
+		 <label>Thông báo</label>
+        <input type="text"  value="${error}" readonly>
+        
+        <button class="btn-save" type="submit">Lưu</button>
         <a class="btn-back" href="${pageContext.request.contextPath}/admin/user">⬅ Quay lại</a>
     </form>
 

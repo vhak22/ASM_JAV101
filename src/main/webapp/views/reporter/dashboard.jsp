@@ -182,8 +182,8 @@
             <tr>
                 <td><img src="${pageContext.request.contextPath}/${n.image}" alt="Ảnh"></td>
                 <td>${n.title}</td>
-                <td>${n.createdAt}</td>
-                <td style="text-align:center;">${n.views}</td>
+                <td>${n.postedDate}</td>
+                <td style="text-align:center;">${n.viewCount}</td>
                 <td>
                     <a class="btn edit"
                        href="${pageContext.request.contextPath}/reporter/news?action=edit&id=${n.id}">

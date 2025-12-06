@@ -33,7 +33,7 @@ public class AdminUserServlet extends HttpServlet {
         // 2. TRANG THÊM NGƯỜI DÙNG
         // -------------------------------------
         if (uri.endsWith("/add")) {
-            req.setAttribute("action", "add");
+            req.setAttribute("add", "");
             req.setAttribute("user", new User());
             req.getRequestDispatcher("/views/admin/user-form.jsp").forward(req, resp);
             return;
@@ -44,6 +44,7 @@ public class AdminUserServlet extends HttpServlet {
         // -------------------------------------
         if (uri.endsWith("/edit")) {
             String id = req.getParameter("id");
+            req.setAttribute("add", "");
             req.setAttribute("action", "update");
             req.setAttribute("user", userDAO.findById(id));
             req.getRequestDispatcher("/views/admin/user-form.jsp").forward(req, resp);
@@ -73,10 +74,10 @@ public class AdminUserServlet extends HttpServlet {
         String fullname = req.getParameter("fullname");
         String password = req.getParameter("password");
         String birthday = req.getParameter("birthday");
-        boolean gender = "1".equals(req.getParameter("gender"));
+        boolean gender = req.getParameter("gender")!= null;
         String mobile = req.getParameter("mobile");
         String email = req.getParameter("email");
-        boolean role = "1".equals(req.getParameter("role"));
+        boolean role = req.getParameter("role")!= null;
 
         User u = new User(id, password, fullname, birthday, gender, mobile, email, role);
 
@@ -85,7 +86,7 @@ public class AdminUserServlet extends HttpServlet {
             if (userDAO.exists(id)) {
                 req.setAttribute("error", "ID đã tồn tại!");
                 req.setAttribute("user", u);
-                req.setAttribute("action", "add");
+
                 req.getRequestDispatcher("/views/admin/user-form.jsp").forward(req, resp);
                 return;
             }

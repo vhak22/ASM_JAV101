@@ -30,20 +30,20 @@
 </div>
 
 <div class="card">
-  <h3>Bài viết mới nhất</h3>
+  <h3>10 Bài viết mới nhất</h3>
 
   <table class="table">
     <thead>
       <tr><th>ID</th><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th></tr>
     </thead>
     <tbody>
-      <c:forEach items="${list}" var="n" begin="0" end="4">
+      <c:forEach items="${list}" var="n" begin="0" end="9">
         <tr>
           <td>${n.id}</td>
           <td>${n.title}</td>
           <td>${n.categoryId}</td>
           <td>${n.reporterId}</td>
-          <td>${n.createdAt}</td>
+          <td>${n.postedDate}</td>
         </tr>
       </c:forEach>
     </tbody>

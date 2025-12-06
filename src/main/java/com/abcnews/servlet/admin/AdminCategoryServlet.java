@@ -42,7 +42,7 @@ public class AdminCategoryServlet extends HttpServlet {
 
         // LIST
         req.setAttribute("list", dao.findAll());
-        req.getRequestDispatcher("/views/admin/category-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/admin/category.jsp").forward(req, resp);
     }
 
     @Override

@@ -11,7 +11,7 @@
         <h2 style="font-size:26px; color:#D93A20; font-weight:700;">Quản lý bài viết</h2>
 
         <a class="btn-add"
-           href="${pageContext.request.contextPath}/views/admin/news-form.jsp?action=add"
+           href="${pageContext.request.contextPath}/admin/news?action=add"
            style="background:#D93A20; padding:10px 16px; color:white; font-weight:600;
                   border-radius:10px; text-decoration:none;">
             + Thêm mới
@@ -62,7 +62,7 @@
                         </td>
 
                         <td style="padding:10px;">
-                            <a href="${pageContext.request.contextPath}/views/admin/news-form.jsp?action=edit&id=${n.id}"
+                            <a href="${pageContext.request.contextPath}/admin/news?action=edit&id=${n.id}"
                                style="background:#FF6A3D; color:white; padding:6px 12px;
                                       border-radius:6px; text-decoration:none;">
                                 Sửa

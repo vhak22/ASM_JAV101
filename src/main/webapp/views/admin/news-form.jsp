@@ -39,13 +39,13 @@
 
                 <label style="font-weight:600;">Danh mục</label>
                 <select name="categoryId" required>
-    <c:forEach var="c" items="${categories}">
-        <option value="${c.id}">
-            ${c.name}
-        </option>
-    </c:forEach>
-</select>
-
+				    <c:forEach var="c" items="${aws}">
+				        <option value="${c.id}">
+				            ${c.name}
+				        </option>
+				    </c:forEach>
+				</select>
+				<br>
 
                 <label style="font-weight:600;">Tác giả</label>
                 <input type="text" name="author" value="${news.author}"
@@ -54,13 +54,13 @@
 
                 <label style="font-weight:600;">Ngày đăng</label>
                 <input type="date" name="createdAt"
-                       value="${news.createdAt}"
+                       value="${news.postedDate}"
                        style="width:100%; padding:12px; margin:8px 0 18px;
                               border:1px solid #ccc; border-radius:10px;">
 
                 <label style="display:flex; align-items:center; gap:8px; font-weight:600; margin:10px 0;">
                     <input type="checkbox" name="highlight"
-                           <c:if test="${news.highlight}">checked</c:if> >
+                           <c:if test="${news.home}">checked</c:if> >
                     Hiển thị lên trang chủ
                 </label>
 
