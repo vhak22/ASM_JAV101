@@ -44,7 +44,7 @@ public class AdminUserServlet extends HttpServlet {
         // -------------------------------------
         if (uri.endsWith("/edit")) {
             String id = req.getParameter("id");
-            req.setAttribute("add", "");
+            req.setAttribute("add", "add");
             req.setAttribute("action", "update");
             req.setAttribute("user", userDAO.findById(id));
             req.getRequestDispatcher("/views/admin/user-form.jsp").forward(req, resp);
