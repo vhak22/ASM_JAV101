@@ -236,5 +236,6 @@ SELECT * FROM Users WHERE id='admin' AND password='123'
 SELECT * FROM News ORDER BY PostedDate DESC
 SELECT TOP 5 * FROM News 
 ORDER BY PostedDate DESC;
-UPDATE News SET ViewCount='900', Home=1 WHERE Id='W104'
+UPDATE Users SET Role='1' WHERE Id='admin'
 use ABCNews
+select * FROM News WHERE Id='N20'

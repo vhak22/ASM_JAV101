@@ -43,6 +43,7 @@ public class AdminDashboardServlet extends HttpServlet {
         req.setAttribute("newsCount", newsDAO.findAll().size());
         req.setAttribute("userCount", userDAO.findAll().size());
         req.setAttribute("categoryCount", categoryDAO.findAll().size());
+        req.setAttribute("list", newsDAO.findAll());
         req.setAttribute("user", u);
         
         req.getRequestDispatcher("/views/admin/dashboard.jsp").forward(req, resp);

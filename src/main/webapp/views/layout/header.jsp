@@ -54,7 +54,7 @@
 		<a href="${pageContext.request.contextPath}/category?id=SPO">Thể Thao</a>
 		<a href="${pageContext.request.contextPath}/category?id=ENT">Giải trí</a>
 		<a href="${pageContext.request.contextPath}/category?id=SOC">Xã hội</a>
-        <a href="#">Liên hệ</a>
+        <a href="${pageContext.request.contextPath}/views/contact/contact.jsp">Liên hệ</a>
 
         <!-- =======================
              1. CHƯA ĐĂNG NHẬP
