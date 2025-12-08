@@ -44,6 +44,16 @@ public class NewsDAOImpl implements NewsDAO {
     
     private static final String SQL_FIND_NEWS_NEW = 
         "SELECT TOP 5 * FROM News ORDER BY PostedDate DESC;";
+    
+    private static final String SQL_FIND_LATEST_POST_VIEWS = 
+        "SELECT TOP 1 ViewCount FROM News WHERE Author = ? ORDER BY PostedDate DESC";
+            
+    private static final String SQL_SUM_VIEWS_BY_AUTHOR = 
+        "SELECT SUM(ViewCount) FROM News WHERE Author = ?";
+    
+    private static final String SQL_COUNT_POSTS_BY_AUTHOR = 
+        "SELECT COUNT(Id) FROM News WHERE Author = ?";
+        
 
     @Override
     public void insert(News n) {
@@ -115,5 +125,23 @@ public class NewsDAOImpl implements NewsDAO {
 	@Override
 	public List<News> findNewNews() {
 		return XQuery.getBeanList(News.class, SQL_FIND_NEWS_NEW);
+	}
+
+	@Override
+	public int countPostsByAuthor(String authorId) {
+		Integer count = XJdbc.getValue(SQL_COUNT_POSTS_BY_AUTHOR, authorId);
+		return count != null ? count : 0;
+	}
+
+	@Override
+	public int sumViewsByAuthor(String authorId) {
+		Integer sum = XJdbc.getValue(SQL_SUM_VIEWS_BY_AUTHOR, authorId);
+		return sum != null ? sum : 0;
+	}
+
+	@Override
+	public int findLatestPostViews(String authorId) {
+		Integer viewCount = XJdbc.getValue(SQL_FIND_LATEST_POST_VIEWS, authorId);
+		return viewCount != null ? viewCount : 0;
 	}
 }

@@ -68,7 +68,8 @@ public class AdminUserServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String action = req.getParameter("action");
-
+        String roleParam = req.getParameter("role");
+        
         // Lấy dữ liệu form
         String id = req.getParameter("id");
         String fullname = req.getParameter("fullname");
@@ -77,7 +78,7 @@ public class AdminUserServlet extends HttpServlet {
         boolean gender = req.getParameter("gender")!= null;
         String mobile = req.getParameter("mobile");
         String email = req.getParameter("email");
-        boolean role = req.getParameter("role")!= null;
+        boolean role = Boolean.parseBoolean(roleParam);
 
         User u = new User(id, password, fullname, birthday, gender, mobile, email, role);
 

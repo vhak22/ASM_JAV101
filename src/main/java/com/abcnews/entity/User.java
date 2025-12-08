@@ -10,6 +10,9 @@ public class User {
     private String mobile;
     private String email;
     private boolean role; 
+    //true = reporter
+    //false = admin
+    
 
     public User() {
     }
