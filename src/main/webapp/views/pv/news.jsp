@@ -11,7 +11,7 @@
         <h2 style="font-size:26px; color:#D93A20; font-weight:700;">Quản lý bài viết</h2>
 
         <a class="btn-add"
-           href="${pageContext.request.contextPath}/admin/news?action=add"
+           href="${pageContext.request.contextPath}/reporter/news?action=add"
            style="background:#D93A20; padding:10px 16px; color:white; font-weight:600;
                   border-radius:10px; text-decoration:none;">
             + Thêm mới
@@ -37,7 +37,7 @@
             </thead>
 
             <tbody>
-                <c:forEach var="n" items="${list}">
+                <c:forEach var="n" items="${myNews}">
                     <tr>
 
                         <td style="padding:10px;">${n.id}</td>
@@ -62,13 +62,13 @@
                         </td>
 
                         <td style="padding:10px;">
-                            <a href="${pageContext.request.contextPath}/admin/news?action=edit&id=${n.id}"
+                            <a href="${pageContext.request.contextPath}/reporter/news?action=edit&id=${n.id}"
                                style="background:#FF6A3D; color:white; padding:6px 12px;
                                       border-radius:6px; text-decoration:none;">
                                 Sửa
                             </a>
 
-                            <a href="${pageContext.request.contextPath}/admin/news?action=delete&id=${n.id}"
+                            <a href="${pageContext.request.contextPath}/reporter/news?action=delete&id=${n.id}"
                                onclick="return confirm('Xóa bài viết này?')"
                                style="background:#D93A20; color:white; padding:6px 12px;
                                       border-radius:6px; margin-left:5px; text-decoration:none;">

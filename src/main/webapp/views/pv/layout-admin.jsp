@@ -15,7 +15,7 @@
   .admin-shell { display:flex; min-height:100vh; }
   /* sidebar */
   .admin-sidebar {
-    width:260px; background:var(--sidebar); padding:22px; box-sizing:border-box;
+    width:265px; background:var(--sidebar); padding:22px; box-sizing:border-box;
     border-right: 1px solid rgba(0,0,0,0.04);
   }
   .brand { font-size:20px; font-weight:700; color:var(--brand); margin-bottom:10px; }
@@ -52,7 +52,7 @@
     <div class="sidebar-menu">
       <a href="${pageContext.request.contextPath}/reporter/dashboard">Dashboard</a>
       <a href="${pageContext.request.contextPath}/reporter/news">Quản lý tin tức</a>
-      <a href="${pageContext.request.contextPath}/reporter/profile">Chỉnh sửa thông tin</a>
+      <a href="${pageContext.request.contextPath}/reporter/user">Chỉnh sửa thông tin</a>
        <a href="${pageContext.request.contextPath}/home">Trang chủ</a>
       <a class="logout" href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
     </div>

@@ -77,8 +77,7 @@
   <div style="flex:1;">
 
     <div class="user-header">
-      <h2>Quản lý người dùng</h2>
-      <a class="btn-add" href="${pageContext.request.contextPath}/admin/user/add">+ Thêm người dùng</a>
+      <h2>Thông Tin Phóng Viên</h2>
     </div>
 
     <table>
@@ -96,31 +95,28 @@
       </thead>
 
       <tbody>
-        <c:forEach items="${list}" var="u">
           <tr>
-            <td>${u.id}</td>
-            <td>${u.fullname}</td>
-            <td>${u.birthday}</td>
+            <td readonly>${user.id}</td>
+            <td>${user.fullname}</td>
+            <td>${user.birthday}</td>
 
             <td>
-              <c:if test="${u.gender == true}">Nam</c:if>
-              <c:if test="${u.gender == false}">Nữ</c:if>
+              <c:if test="${user.gender == true}">Nam</c:if>
+              <c:if test="${user.gender == false}">Nữ</c:if>
             </td>
 
-            <td>${u.mobile}</td>
-            <td>${u.email}</td>
+            <td>${user.mobile}</td>
+            <td>${user.email}</td>
 
             <td>
-              <c:if test="${u.role == true}">Admin</c:if>
-              <c:if test="${u.role == false}">Reporter</c:if>
+              <c:if test="${user.role == true}">Admin</c:if>
+              <c:if test="${user.role == false}">Reporter</c:if>
             </td>
 
             <td>
-              <a class="btn btn-edit" href="${pageContext.request.contextPath}/admin/user/edit?id=${u.id}">Sửa</a>
-              <a class="btn btn-delete" href="${pageContext.request.contextPath}/admin/user/delete?id=${u.id}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+              <a class="btn btn-edit" href="${pageContext.request.contextPath}/reporter/user/edit?id=${user.id}">Sửa</a>
             </td>
           </tr>
-        </c:forEach>
       </tbody>
     </table>
 
