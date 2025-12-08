@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/reporter/profile")
+@WebServlet({"/reporter/user","/reporter/user/edit"})
 public class ReporterProfileServlet extends HttpServlet {
 
     private UserDAO userDAO = new UserDAOImpl();
@@ -17,7 +17,7 @@ public class ReporterProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
+    	String uri = req.getRequestURI();
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -25,9 +25,18 @@ public class ReporterProfileServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
-
+        
+        if (uri.endsWith("/edit")) {
+            String id = req.getParameter("id");
+            req.setAttribute("add", "add");
+            req.setAttribute("action", "update");
+            req.setAttribute("user", userDAO.findById(id));
+            req.getRequestDispatcher("/views/pv/user-form.jsp").forward(req, resp);
+            return;
+        }
+        
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/views/reporter/profile.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/pv/user.jsp").forward(req, resp);
     }
 
     @Override
@@ -36,20 +45,30 @@ public class ReporterProfileServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-
-        String username = req.getParameter("username");
+        String action = req.getParameter("action");
+        String roleParam = req.getParameter("role");
+        String genderParam = req.getParameter("gender");
+        
+        // Lấy dữ liệu form
+        String id = req.getParameter("id");
+        String fullname = req.getParameter("fullname");
         String password = req.getParameter("password");
+        String birthday = req.getParameter("birthday");
+        boolean gender = Boolean.parseBoolean(genderParam);
+        String mobile = req.getParameter("mobile");
+        String email = req.getParameter("email");
+        boolean role = Boolean.parseBoolean(roleParam);
 
-        user.setFullname(username);
-        user.setPassword(password);
+        User u = new User(id, password, fullname, birthday, gender, mobile, email, role);
 
-        userDAO.update(user);
+        // XỬ LÝ UPDATE USER
+        if ("update".equals(action)) {
+            userDAO.update(u);
+            HttpSession session = req.getSession();
+            session.setAttribute("user", u);
+        }
 
-        // Cập nhật lại session
-        session.setAttribute("user", user);
-
-        resp.sendRedirect("profile");
+        
+        resp.sendRedirect(req.getContextPath() + "/reporter/user");
     }
 }

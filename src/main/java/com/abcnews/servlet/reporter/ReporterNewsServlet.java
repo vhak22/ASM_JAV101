@@ -4,6 +4,7 @@ import com.abcnews.dao.NewsDAO;
 import com.abcnews.dao.CategoryDAO;
 import com.abcnews.daoimpl.NewsDAOImpl;
 import com.abcnews.daoimpl.CategoryDAOImpl;
+import com.abcnews.entity.Category;
 import com.abcnews.entity.News;
 import com.abcnews.entity.User;
 
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @WebServlet("/reporter/news")
 public class ReporterNewsServlet extends HttpServlet {
@@ -32,27 +34,35 @@ public class ReporterNewsServlet extends HttpServlet {
         }
 
         String action = req.getParameter("action");
-
-        if ("edit".equals(action)) {
-        	String id = req.getParameter("id");
+        List<Category> categories = categoryDAO.findAll();
+       
+        if ("add".equals(action)) {
+            String id = req.getParameter("id");
             req.setAttribute("news", newsDAO.findById(id));
-        } else if ("delete".equals(action)) {
-        	String id = req.getParameter("id");
+            req.setAttribute("aws", categories);
+            req.getRequestDispatcher("/views/pv/news-form.jsp").forward(req, resp);
+            return;
+        }
+        
+        if ("edit".equals(action)) {
+            String id = req.getParameter("id");
+            req.setAttribute("news", newsDAO.findById(id));
+            req.setAttribute("aws", categories);
+            req.getRequestDispatcher("/views/pv/news-form.jsp").forward(req, resp);
+            return;
+        }
 
-            News n = newsDAO.findById(id);
-
-            if (n != null && n.getAuthor() == reporter.getId()) {
-                newsDAO.delete(id);
-            }
-
-            resp.sendRedirect("news");
+        if ("delete".equals(action)) {
+            String id = req.getParameter("id");
+            newsDAO.delete(id);
+            resp.sendRedirect(req.getContextPath() + "/admin/news");
             return;
         }
 
         req.setAttribute("categories", categoryDAO.findAll());
         req.setAttribute("myNews", newsDAO.findByReporter(reporter.getId()));
 
-        req.getRequestDispatcher("/views/reporter/news.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/pv/news.jsp").forward(req, resp);
     }
 
     @Override

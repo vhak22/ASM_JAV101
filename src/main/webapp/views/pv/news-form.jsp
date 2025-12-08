@@ -77,7 +77,7 @@
                         Lưu
                     </button>
 
-                    <a href="${pageContext.request.contextPath}/admin/news"
+                    <a href="${pageContext.request.contextPath}/reporter/news"
                        style="background:#ccc; color:black; padding:12px 20px;
                               border-radius:10px; margin-left:10px; text-decoration:none;">
                         Quay lại

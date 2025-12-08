@@ -238,11 +238,11 @@ SELECT TOP 5 * FROM News
 ORDER BY PostedDate DESC;
 UPDATE Users SET Role='1' WHERE Id='admin'
 use ABCNews
-select * FROM News WHERE Id='N20'
+select * FROM News WHERE Author = 'pv006'
 
-/*tổng số lượt xem của bài viết gần nhất*/
+/*SQL_FIND_LATEST_POST_VIEWS*/
 SELECT TOP 1 ViewCount FROM News WHERE Author = 'pv006' ORDER BY PostedDate DESC
-/*tổng số lượt xem của user đó*/
+/*SQL_SUM_VIEWS_BY_AUTHOR*/
 SELECT SUM(ViewCount) FROM News WHERE Author = 'pv006'
-/*tổng số bài viết của 1 user*/
+/*SQL_COUNT_POSTS_BY_AUTHOR*/
 SELECT COUNT(Id) FROM News WHERE Author = 'pv006'
