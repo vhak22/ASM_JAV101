@@ -1,7 +1,11 @@
 package com.abcnews.servlet.reporter;
 
 import com.abcnews.dao.NewsDAO;
+import com.abcnews.dao.UserDAO;
+import com.abcnews.dao.CategoryDAO;
 import com.abcnews.daoimpl.NewsDAOImpl;
+import com.abcnews.daoimpl.UserDAOImpl;
+import com.abcnews.daoimpl.CategoryDAOImpl;
 import com.abcnews.entity.User;
 
 import javax.servlet.*;
@@ -13,29 +17,35 @@ import java.io.IOException;
 public class ReporterDashboardServlet extends HttpServlet {
 
     private NewsDAO newsDAO = new NewsDAOImpl();
+    private UserDAO userDAO = new UserDAOImpl();
+    private CategoryDAO categoryDAO = new CategoryDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        // kiểm tra login
+        HttpSession session = req.getSession(false);
 
-        // Chưa login → về login
-        if (user == null) {
+        if (session == null || session.getAttribute("user") == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
-        // Nếu là ADMIN → thấy toàn bộ bài viết
-        if (user.isRole()) {   // true = admin
-            req.setAttribute("myNews", newsDAO.findAll());
-        } 
-        else {
-            // Reporter chỉ thấy bài của họ
-            req.setAttribute("myNews", newsDAO.findByReporter(user.getId()));
+        User u = (User) session.getAttribute("user");
+        
+        // kiểm tra quyền admin (role = true)
+        if (u.isRole()) {
+            resp.sendRedirect(req.getContextPath() + "/home");
+            return;
         }
-
-        req.getRequestDispatcher("/views/reporter/dashboard.jsp").forward(req, resp);
+        
+        req.setAttribute("countPost", newsDAO.countPostsByAuthor(u.getId()));
+        req.setAttribute("sumViews", newsDAO.sumViewsByAuthor(u.getId()));
+        req.setAttribute("LatestPostViews", newsDAO.findLatestPostViews(u.getId()));
+        req.setAttribute("list", newsDAO.findAll());
+        req.setAttribute("user", u);
+        
+        req.getRequestDispatcher("/views/pv/dashboard.jsp").forward(req, resp);
     }
 }

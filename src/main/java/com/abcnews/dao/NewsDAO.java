@@ -10,4 +10,7 @@ public interface NewsDAO extends CrudDAO<News, String> {
     List<News> findRelatedNews(String categoryId, String currentNewsId);
     List<News> findHottestNews();
     List<News> findNewNews();
+    int countPostsByAuthor(String authorId);
+    int sumViewsByAuthor(String authorId);
+    int findLatestPostViews(String authorId);
 }
