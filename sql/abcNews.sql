@@ -222,7 +222,7 @@ INSERT INTO Newsletters (Email, Enabled) VALUES
 ('user2@yahoo.com', 1),
 ('user3@hotmail.com', 0);
 GO
-SELECT * FROM Users
+SELECT * FROM Users WHERE Id ='pv006'
 go
 SELECT * FROM News
 go
