@@ -40,6 +40,7 @@ public class ReporterNewsServlet extends HttpServlet {
             String id = req.getParameter("id");
             req.setAttribute("news", newsDAO.findById(id));
             req.setAttribute("aws", categories);
+            req.setAttribute("title", "Add News");
             req.getRequestDispatcher("/views/pv/news-form.jsp").forward(req, resp);
             return;
         }
@@ -48,6 +49,7 @@ public class ReporterNewsServlet extends HttpServlet {
             String id = req.getParameter("id");
             req.setAttribute("news", newsDAO.findById(id));
             req.setAttribute("aws", categories);
+            req.setAttribute("title", "Edit News");
             req.getRequestDispatcher("/views/pv/news-form.jsp").forward(req, resp);
             return;
         }
@@ -55,7 +57,7 @@ public class ReporterNewsServlet extends HttpServlet {
         if ("delete".equals(action)) {
             String id = req.getParameter("id");
             newsDAO.delete(id);
-            resp.sendRedirect(req.getContextPath() + "/admin/news");
+            resp.sendRedirect(req.getContextPath() + "/reporter/news");
             return;
         }
 
@@ -73,26 +75,40 @@ public class ReporterNewsServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         User reporter = (User) session.getAttribute("user");
-
+        
+        if (reporter == null) {
+            resp.sendRedirect(req.getContextPath() + "/login"); 
+            return; 
+        }
+        String cat = req.getParameter("categoryId");
+    	if (cat == null) {
+    	    resp.sendRedirect(req.getContextPath() + "/admin/news?action=add&error=missingCategory");
+    	    return;
+    	}
         String idStr = req.getParameter("id");
         String title = req.getParameter("title");
         String content = req.getParameter("content");
         String image = req.getParameter("image");
-        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+        String categoryId = req.getParameter("categoryId");
+        String homeParam = req.getParameter("highlight");
+        boolean isHome = Boolean.parseBoolean(homeParam);
 
         News n = new News();
         n.setTitle(title);
         n.setContent(content);
         n.setImage(image);
-        n.setCategoryId(String.valueOf(categoryId));
+        n.setCategoryId(categoryId);
         n.setAuthor(reporter.getId());
         n.setPostedDate(java.sql.Date.valueOf(LocalDate.now()));
         n.setViewCount(0);
         n.setHome(false);
 
         if (idStr == null || idStr.isEmpty()) {
+        	int nextId = newsDAO.findAll().size() + 1;
+            n.setId("N" + nextId);
             newsDAO.insert(n);
         } else {
+        	n.setHome(isHome);
             n.setId(String.valueOf(idStr));
             newsDAO.update(n);
         }

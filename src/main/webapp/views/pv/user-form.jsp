@@ -5,7 +5,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Thêm / Sửa người dùng</title>
+<title>${title}</title>
 
 <style>
 body {
