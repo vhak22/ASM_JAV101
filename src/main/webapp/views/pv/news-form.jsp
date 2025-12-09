@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<title>Reporter - ${title}</title>
 <jsp:include page="layout-admin.jsp" />
 
 <div class="content" style="padding:25px;">
@@ -24,7 +24,7 @@
             box-shadow:0 4px 14px rgba(0,0,0,0.12);
         ">
 
-            <form method="post" action="${pageContext.request.contextPath}/admin/news">
+            <form method="post" action="${pageContext.request.contextPath}/reporter/news">
 
                 <!-- ID (readonly khi edit) -->
                 <label style="font-weight:600;">Tiêu đề</label>
@@ -45,12 +45,8 @@
 				        </option>
 				    </c:forEach>
 				</select>
-				<br>
+				<br><br>
 
-                <label style="font-weight:600;">Tác giả</label>
-                <input type="text" name="author" value="${news.author}"
-                       style="width:100%; padding:12px; margin:8px 0 18px;
-                              border:1px solid #ccc; border-radius:10px;" required>
 
                 <label style="font-weight:600;">Ngày đăng</label>
                 <input type="date" name="createdAt"
@@ -58,11 +54,6 @@
                        style="width:100%; padding:12px; margin:8px 0 18px;
                               border:1px solid #ccc; border-radius:10px;">
 
-                <label style="display:flex; align-items:center; gap:8px; font-weight:600; margin:10px 0;">
-                    <input type="checkbox" name="highlight"
-                           <c:if test="${news.home}">checked</c:if> >
-                    Hiển thị lên trang chủ
-                </label>
 
                 <label style="font-weight:600;">Nội dung</label>
                 <textarea name="content" rows="8"
@@ -85,6 +76,7 @@
                 </div>
 
                 <!-- Hidden field: action -->
+                <input type="hidden" name="highlight" value="${news.home}">
                 <input type="hidden" name="action" value="${param.action}">
                 <input type="hidden" name="id" value="${news.id}">
             </form>

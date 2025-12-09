@@ -31,10 +31,11 @@ public class ReporterProfileServlet extends HttpServlet {
             req.setAttribute("add", "add");
             req.setAttribute("action", "update");
             req.setAttribute("user", userDAO.findById(id));
+            req.setAttribute("title", "Reporter - Edit Profile");
             req.getRequestDispatcher("/views/pv/user-form.jsp").forward(req, resp);
             return;
         }
-        
+        req.setAttribute("title", "Reporter - Profile");
         req.setAttribute("user", user);
         req.getRequestDispatcher("/views/pv/user.jsp").forward(req, resp);
     }

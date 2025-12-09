@@ -74,8 +74,8 @@ public class AdminNewsServlet extends HttpServlet {
         String categoryId = req.getParameter("categoryId");
 
 
-        
-        boolean isHome = req.getParameter("highlight") != null;
+        String homeParam = req.getParameter("highlight");
+        boolean isHome = Boolean.parseBoolean(homeParam);
         String id = req.getParameter("id");
         String title = req.getParameter("title");
         String content = req.getParameter("content");

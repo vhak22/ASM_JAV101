@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<title>Reporter - News</title>
 <jsp:include page="layout-admin.jsp" />
 
 <div class="content" style="padding:25px;">
