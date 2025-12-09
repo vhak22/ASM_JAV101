@@ -104,10 +104,12 @@ public class ReporterNewsServlet extends HttpServlet {
         n.setHome(false);
 
         if (idStr == null || idStr.isEmpty()) {
+        	
         	int nextId = newsDAO.findAll().size() + 1;
             n.setId("N" + nextId);
             newsDAO.insert(n);
         } else {
+        	 n.setViewCount(Integer.parseInt(req.getParameter("view")));
         	n.setHome(isHome);
             n.setId(String.valueOf(idStr));
             newsDAO.update(n);

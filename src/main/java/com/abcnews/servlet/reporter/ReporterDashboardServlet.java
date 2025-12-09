@@ -43,7 +43,7 @@ public class ReporterDashboardServlet extends HttpServlet {
         req.setAttribute("countPost", newsDAO.countPostsByAuthor(u.getId()));
         req.setAttribute("sumViews", newsDAO.sumViewsByAuthor(u.getId()));
         req.setAttribute("LatestPostViews", newsDAO.findLatestPostViews(u.getId()));
-        req.setAttribute("list", newsDAO.findAll());
+        req.setAttribute("list", newsDAO.findByReporter(u.getId()));
         req.setAttribute("user", u);
         
         req.getRequestDispatcher("/views/pv/dashboard.jsp").forward(req, resp);

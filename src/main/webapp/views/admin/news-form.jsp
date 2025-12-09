@@ -85,6 +85,7 @@
                 </div>
 
                 <!-- Hidden field: action -->
+                <input type="hidden" name="view" value="${news.viewCount}">
                 <input type="hidden" name="action" value="${param.action}">
                 <input type="hidden" name="id" value="${news.id}">
             </form>

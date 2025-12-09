@@ -47,7 +47,7 @@
 <div class="admin-shell">
   <div class="admin-sidebar">
     <div class="brand">ABC News — Reporter</div>
-    <div class="small">Quản trị Độc Giả</div>
+    <div class="small">Quản trị Phóng Viên</div>
 
     <div class="sidebar-menu">
       <a href="${pageContext.request.contextPath}/reporter/dashboard">Dashboard</a>

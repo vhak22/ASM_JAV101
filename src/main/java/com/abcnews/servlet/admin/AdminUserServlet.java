@@ -69,13 +69,14 @@ public class AdminUserServlet extends HttpServlet {
 
         String action = req.getParameter("action");
         String roleParam = req.getParameter("role");
+        String genderParam = req.getParameter("gender");
         
         // Lấy dữ liệu form
         String id = req.getParameter("id");
         String fullname = req.getParameter("fullname");
         String password = req.getParameter("password");
         String birthday = req.getParameter("birthday");
-        boolean gender = req.getParameter("gender")!= null;
+        boolean gender = Boolean.parseBoolean(genderParam);
         String mobile = req.getParameter("mobile");
         String email = req.getParameter("email");
         boolean role = Boolean.parseBoolean(roleParam);

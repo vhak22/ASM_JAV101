@@ -66,14 +66,14 @@ public class AdminNewsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
     	req.setCharacterEncoding("UTF-8");
+	  HttpSession session = req.getSession();
+      User user = (User) session.getAttribute("user");
     	String cat = req.getParameter("categoryId");
     	if (cat == null) {
     	    resp.sendRedirect(req.getContextPath() + "/admin/news?action=add&error=missingCategory");
     	    return;
     	}
         String categoryId = req.getParameter("categoryId");
-
-
         String homeParam = req.getParameter("highlight");
         boolean isHome = Boolean.parseBoolean(homeParam);
         String id = req.getParameter("id");
@@ -81,8 +81,7 @@ public class AdminNewsServlet extends HttpServlet {
         String content = req.getParameter("content");
         String image = req.getParameter("image");
 
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+      
 
         News n = new News();
         n.setTitle(title);
@@ -96,11 +95,13 @@ public class AdminNewsServlet extends HttpServlet {
 
         if (id == null || id.trim().isEmpty()) {
             // Tạo ID mới
+        	n.setViewCount(0);
             int nextId = newsDAO.findAll().size() + 1;
             n.setId("N" + nextId);
 
             newsDAO.insert(n);
         } else {
+        	n.setViewCount(Integer.parseInt(req.getParameter("view")));
             n.setId(id);
             newsDAO.update(n);
         }
