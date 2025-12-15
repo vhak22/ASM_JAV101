@@ -54,6 +54,7 @@
       <a href="${pageContext.request.contextPath}/admin/news">Quản lý tin tức</a>
       <a href="${pageContext.request.contextPath}/admin/category">Quản lý danh mục</a>
       <a href="${pageContext.request.contextPath}/admin/user">Quản lý người dùng</a>
+      <a href="${pageContext.request.contextPath}/admin/newsletter">Quản lí bản tin</a>
        <a href="${pageContext.request.contextPath}/home">Trang chủ</a>
       <a class="logout" href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
     </div>
