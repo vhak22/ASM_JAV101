@@ -1,8 +1,8 @@
 # 📰 ABC News - Hệ Thống Quản Lý Tin Tức (CMS)
 
-> **Môn học:** Java Servlet & JSP  
-> **Sinh viên thực hiện:** Vĩnh Khánh  
-> **Trạng thái:** 🟢 Đang phát triển (Development)
+> **Môn học:** Lập Trình Web Cơ Bản (JAV101) (Java Servlet & JSP)  
+> **Sinh viên thực hiện:** Nguyễn Đài Vĩnh Khánh  
+> **Trạng thái:**  Đang phát triển (Development)
 
 Hệ thống CMS tin tức hoàn chỉnh được xây dựng theo mô hình **MVC (Model-View-Controller)**, hỗ trợ đa nền tảng người dùng (Độc giả, Phóng viên, Quản trị viên) với đầy đủ các chức năng quản lý nội dung, phân quyền và đa ngôn ngữ.
 
