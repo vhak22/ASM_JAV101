@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,23 +26,23 @@
     </style>
 </head>
 <body>
+<c:import url="../layout/header.jsp" />
 
-<header>
-    <h2>ABC News – Liên hệ</h2>
-</header>
 
 <div class="category-container">
 
-    <h2 style="color:#D93A20;">Gửi phản hồi</h2>
+    <h2 style="color:#D93A20;">Gửi thông tin liên hệ</h2>
 
-    <form>
-        <input type="text" placeholder="Họ và tên">
-        <input type="email" placeholder="Email">
-        <textarea rows="5" placeholder="Nội dung"></textarea>
-        <button>Gửi thông tin</button>
+    <form action="${pageContext.request.contextPath}/contact" method="post">
+        <input type="text" name="subject" placeholder="Tiêu Đề" required>
+        <input type="email" name="to" placeholder="email" required>
+        <textarea rows="5" name="content" placeholder="Nội dung" required></textarea>
+        <button type="submit" >Gửi thông tin</button>
+        <button type="reset" >Xóa</button>
+        <mark >${message}</mark>
     </form>
 
 </div>
-
+<c:import url="../layout/footer.jsp" />
 </body>
 </html>

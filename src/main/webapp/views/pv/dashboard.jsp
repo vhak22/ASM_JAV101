@@ -23,9 +23,9 @@
   </div>
 
   <div class="card">
-    <h3>Tổng số bài viết 1 tháng gần đây</h3>
+    <h3>Tổng số lượt xem bài viết mới nhất</h3>
     <p style="font-size:28px; color:var(--brand); margin:8px 0;">${LatestPostViews}</p>
-    <small>Bài viết</small>
+    <small>Lượt xem</small>
   </div>
 </div>
 
@@ -34,7 +34,7 @@
 
   <table class="table">
     <thead>
-      <tr><th>ID</th><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th></tr>
+      <tr><th>ID</th><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Lượt xem</th><th>Ngày</th></tr>
     </thead>
     <tbody>
       <c:forEach items="${list}" var="n" begin="0" end="9">
@@ -42,7 +42,8 @@
           <td>${n.id}</td>
           <td>${n.title}</td>
           <td>${n.categoryId}</td>
-          <td>${n.reporterId}</td>
+          <td>${n.author}</td>
+          <td>${n.viewCount}</td>
           <td>${n.postedDate}</td>
         </tr>
       </c:forEach>

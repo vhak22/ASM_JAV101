@@ -29,7 +29,7 @@ CREATE TABLE dbo.Users (
     Gender      BIT             NULL,
     Mobile      NVARCHAR(20)    NULL,
     Email       NVARCHAR(255)   NULL,
-    Role        INT             NOT NULL    -- 0=Độc giả, 1=Phóng viên, 2=Admin
+    Role        INT             NOT NULL    --0=Phóng viên, 1=Admin
 );
 GO
 
@@ -234,15 +234,101 @@ SELECT * FROM News WHERE CategoryId='POL' ORDER BY PostedDate DESC
 use ABCNews
 SELECT * FROM Users WHERE id='admin' AND password='123'
 SELECT * FROM News ORDER BY PostedDate DESC
-SELECT TOP 5 * FROM News 
+SELECT TOP 5 * FROM News ORDER BY ViewCount DESC
 ORDER BY PostedDate DESC;
-UPDATE Users SET Role='1' WHERE Id='admin'
+UPDATE News SET Author='pv008' WHERE Id='W090'
+W101
+W099
+N090
 use ABCNews
-select * FROM News WHERE Author = 'pv006'
+select * FROM News WHERE Author = 'pv008'
 
 /*SQL_FIND_LATEST_POST_VIEWS*/
-SELECT TOP 1 ViewCount FROM News WHERE Author = 'pv006' ORDER BY PostedDate DESC
+SELECT TOP 1 ViewCount FROM News WHERE Author = 'pv008' ORDER BY PostedDate DESC
 /*SQL_SUM_VIEWS_BY_AUTHOR*/
 SELECT SUM(ViewCount) FROM News WHERE Author = 'pv006'
 /*SQL_COUNT_POSTS_BY_AUTHOR*/
 SELECT COUNT(Id) FROM News WHERE Author = 'pv006'
+
+USE ABCNews;
+GO
+
+-- =============================================
+-- 1. TẠO USER TESTER
+-- =============================================
+-- Xóa nếu đã tồn tại để tránh lỗi trùng lặp
+DELETE FROM Users WHERE Id IN ('tester1', 'tester2');
+
+INSERT INTO Users (Id, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES
+('tester1', '123', N'Admin Tester',    '1990-01-01', 1, '0999888777', 'admin.test@abcnews.vn', 1), -- Role 2: Admin
+('tester2', '123', N'Reporter Tester', '1995-06-15', 0, '0999666555', 'reporter.test@abcnews.vn', 0); -- Role 1: Reporter
+GO
+
+-- =============================================
+-- 2. TẠO 50 BÀI VIẾT (10 BÀI/CHỦ ĐỀ)
+-- =============================================
+-- Xóa các bài test cũ nếu có
+DELETE FROM News WHERE Id LIKE 'TEST_%';
+
+INSERT INTO News (Id, Title, Content, Image, PostedDate, Author, ViewCount, CategoryId, Home) VALUES
+
+-- === 1. CHÍNH TRỊ (POL) ===
+('TEST_POL_01', N'Chính sách phát triển 2025', N'Nội dung demo về chính trị...', 'images/pol_01.jpg', '2025-01-10', 'tester2', 1050, 'POL', 1),
+('TEST_POL_02', N'Hội nghị thượng đỉnh tháng 2', N'Nội dung demo về chính trị...', 'images/pol_02.jpg', '2025-02-12', 'tester2', 1200, 'POL', 0),
+('TEST_POL_03', N'Thay đổi luật lao động', N'Nội dung demo về chính trị...', 'images/pol_03.jpg', '2025-03-05', 'tester2', 1890, 'POL', 1),
+('TEST_POL_04', N'Hợp tác quốc tế mới', N'Nội dung demo về chính trị...', 'images/pol_04.jpg', '2025-04-15', 'tester2', 1560, 'POL', 0),
+('TEST_POL_05', N'Bầu cử hội đồng nhân dân', N'Nội dung demo về chính trị...', 'images/pol_05.jpg', '2025-05-20', 'tester2', 1980, 'POL', 1),
+('TEST_POL_06', N'Chiến lược kinh tế vĩ mô', N'Nội dung demo về chính trị...', 'images/pol_06.jpg', '2025-06-11', 'tester2', 1100, 'POL', 0),
+('TEST_POL_07', N'Đối ngoại song phương', N'Nội dung demo về chính trị...', 'images/pol_07.jpg', '2025-07-22', 'tester2', 1450, 'POL', 1),
+('TEST_POL_08', N'Quy hoạch đô thị mới', N'Nội dung demo về chính trị...', 'images/pol_08.jpg', '2025-08-09', 'tester2', 1700, 'POL', 0),
+('TEST_POL_09', N'Cải cách hành chính công', N'Nội dung demo về chính trị...', 'images/pol_09.jpg', '2025-09-30', 'tester2', 1320, 'POL', 1),
+('TEST_POL_10', N'Tổng kết quý 4 năm 2025', N'Nội dung demo về chính trị...', 'images/pol_10.jpg', '2025-10-15', 'tester2', 1999, 'POL', 0),
+
+-- === 2. XÃ HỘI (SOC) ===
+('TEST_SOC_01', N'Đời sống dân cư đô thị', N'Nội dung demo xã hội...', 'images/soc_01.jpg', '2025-01-15', 'tester2', 1150, 'SOC', 1),
+('TEST_SOC_02', N'Vấn đề môi trường biển', N'Nội dung demo xã hội...', 'images/soc_02.jpg', '2025-02-20', 'tester2', 1250, 'SOC', 0),
+('TEST_SOC_03', N'Giáo dục vùng cao 2025', N'Nội dung demo xã hội...', 'images/soc_03.jpg', '2025-03-10', 'tester2', 1900, 'SOC', 1),
+('TEST_SOC_04', N'Y tế cộng đồng phát triển', N'Nội dung demo xã hội...', 'images/soc_04.jpg', '2025-04-05', 'tester2', 1600, 'SOC', 0),
+('TEST_SOC_05', N'Giao thông thông minh', N'Nội dung demo xã hội...', 'images/soc_05.jpg', '2025-05-12', 'tester2', 1080, 'SOC', 1),
+('TEST_SOC_06', N'An sinh xã hội mùa mưa', N'Nội dung demo xã hội...', 'images/soc_06.jpg', '2025-06-25', 'tester2', 1340, 'SOC', 0),
+('TEST_SOC_07', N'Tình nguyện viên mùa hè', N'Nội dung demo xã hội...', 'images/soc_07.jpg', '2025-07-30', 'tester2', 1750, 'SOC', 1),
+('TEST_SOC_08', N'Lễ hội văn hóa ẩm thực', N'Nội dung demo xã hội...', 'images/soc_08.jpg', '2025-08-18', 'tester2', 1420, 'SOC', 0),
+('TEST_SOC_09', N'Phong trào xanh sạch đẹp', N'Nội dung demo xã hội...', 'images/soc_09.jpg', '2025-09-02', 'tester2', 1950, 'SOC', 1),
+('TEST_SOC_10', N'Câu chuyện nhân văn 2025', N'Nội dung demo xã hội...', 'images/soc_10.jpg', '2025-10-10', 'tester2', 1680, 'SOC', 0),
+
+-- === 3. CÔNG NGHỆ (TEC) ===
+('TEST_TEC_01', N'Smartphone màn hình cuộn', N'Review công nghệ...', 'images/tec_01.jpg', '2025-01-05', 'tester2', 1990, 'TEC', 1),
+('TEST_TEC_02', N'AI trong y học hiện đại', N'Review công nghệ...', 'images/tec_02.jpg', '2025-02-08', 'tester2', 1540, 'TEC', 0),
+('TEST_TEC_03', N'Chip xử lý lượng tử', N'Review công nghệ...', 'images/tec_03.jpg', '2025-03-15', 'tester2', 1230, 'TEC', 1),
+('TEST_TEC_04', N'Xe điện tự lái cấp độ 5', N'Review công nghệ...', 'images/tec_04.jpg', '2025-04-22', 'tester2', 1760, 'TEC', 0),
+('TEST_TEC_05', N'Mạng 6G thử nghiệm', N'Review công nghệ...', 'images/tec_05.jpg', '2025-05-30', 'tester2', 1880, 'TEC', 1),
+('TEST_TEC_06', N'Robot giúp việc gia đình', N'Review công nghệ...', 'images/tec_06.jpg', '2025-06-14', 'tester2', 1120, 'TEC', 0),
+('TEST_TEC_07', N'Kính thực tế ảo mới', N'Review công nghệ...', 'images/tec_07.jpg', '2025-07-07', 'tester2', 1350, 'TEC', 1),
+('TEST_TEC_08', N'Blockchain trong quản lý', N'Review công nghệ...', 'images/tec_08.jpg', '2025-08-25', 'tester2', 1670, 'TEC', 0),
+('TEST_TEC_09', N'Laptop pin 48 giờ', N'Review công nghệ...', 'images/tec_09.jpg', '2025-09-19', 'tester2', 1490, 'TEC', 1),
+('TEST_TEC_10', N'Hệ điều hành Windows 12', N'Review công nghệ...', 'images/tec_10.jpg', '2025-10-28', 'tester2', 1910, 'TEC', 0),
+
+-- === 4. THỂ THAO (SPO) ===
+('TEST_SPO_01', N'Chung kết bóng đá C1', N'Tin thể thao...', 'images/spo_01.jpg', '2025-01-18', 'tester2', 1010, 'SPO', 1),
+('TEST_SPO_02', N'Giải quần vợt mở rộng', N'Tin thể thao...', 'images/spo_02.jpg', '2025-02-14', 'tester2', 1550, 'SPO', 0),
+('TEST_SPO_03', N'Marathon xuyên Việt', N'Tin thể thao...', 'images/spo_03.jpg', '2025-03-22', 'tester2', 1820, 'SPO', 1),
+('TEST_SPO_04', N'Đua xe F1 tại Hà Nội', N'Tin thể thao...', 'images/spo_04.jpg', '2025-04-30', 'tester2', 1290, 'SPO', 0),
+('TEST_SPO_05', N'Tuyển bóng chuyền nữ', N'Tin thể thao...', 'images/spo_05.jpg', '2025-05-18', 'tester2', 1660, 'SPO', 1),
+('TEST_SPO_06', N'Kỷ lục bơi lội mới', N'Tin thể thao...', 'images/spo_06.jpg', '2025-06-05', 'tester2', 1940, 'SPO', 0),
+('TEST_SPO_07', N'Giải bóng rổ nhà nghề', N'Tin thể thao...', 'images/spo_07.jpg', '2025-07-12', 'tester2', 1180, 'SPO', 1),
+('TEST_SPO_08', N'Golf thủ trẻ triển vọng', N'Tin thể thao...', 'images/spo_08.jpg', '2025-08-28', 'tester2', 1390, 'SPO', 0),
+('TEST_SPO_09', N'Esports vô địch thế giới', N'Tin thể thao...', 'images/spo_09.jpg', '2025-09-09', 'tester2', 1720, 'SPO', 1),
+('TEST_SPO_10', N'Thế vận hội mùa đông', N'Tin thể thao...', 'images/spo_10.jpg', '2025-10-02', 'tester2', 1470, 'SPO', 0),
+
+-- === 5. GIẢI TRÍ (ENT) ===
+('TEST_ENT_01', N'Phim bom tấn ra rạp', N'Showbiz...', 'images/ent_01.jpg', '2025-01-25', 'tester2', 1850, 'ENT', 1),
+('TEST_ENT_02', N'Show diễn thời trang Thu Đông', N'Showbiz...', 'images/ent_02.jpg', '2025-02-28', 'tester2', 1150, 'ENT', 0),
+('TEST_ENT_03', N'Ca sĩ A ra mắt MV mới', N'Showbiz...', 'images/ent_03.jpg', '2025-03-18', 'tester2', 1980, 'ENT', 1),
+('TEST_ENT_04', N'Hoa hậu hòa bình quốc tế', N'Showbiz...', 'images/ent_04.jpg', '2025-04-10', 'tester2', 1440, 'ENT', 0),
+('TEST_ENT_05', N'Scandal sao hạng A', N'Showbiz...', 'images/ent_05.jpg', '2025-05-05', 'tester2', 1260, 'ENT', 1),
+('TEST_ENT_06', N'Liveshow kỷ niệm 20 năm', N'Showbiz...', 'images/ent_06.jpg', '2025-06-20', 'tester2', 1780, 'ENT', 0),
+('TEST_ENT_07', N'Game show truyền hình mới', N'Showbiz...', 'images/ent_07.jpg', '2025-07-15', 'tester2', 1030, 'ENT', 1),
+('TEST_ENT_08', N'Lễ trao giải Oscar 2025', N'Showbiz...', 'images/ent_08.jpg', '2025-08-08', 'tester2', 1590, 'ENT', 0),
+('TEST_ENT_09', N'Triển lãm tranh đương đại', N'Showbiz...', 'images/ent_09.jpg', '2025-09-12', 'tester2', 1370, 'ENT', 1),
+('TEST_ENT_10', N'Nhóm nhạc Hàn Quốc đến VN', N'Showbiz...', 'images/ent_10.jpg', '2025-10-30', 'tester2', 1920, 'ENT', 0);
+GO

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lều Báo - Trang chủ</title>
+    <title>ABC News - Trang chủ</title>
     <!-- Sử dụng Tailwind CSS để dễ dàng tạo bố cục responsive và đẹp mắt -->
     <script src="https://cdn.tailwindcss.com"></script>
  <!--   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/style/styleAll.css"> -->

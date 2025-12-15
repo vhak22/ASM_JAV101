@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<fmt:setBundle basename="messages" />
     
 <!DOCTYPE html>
 <html>
@@ -49,12 +51,20 @@
     	<div><b>ABC News ${a}</b></div>	
 	</a>
     <div class="nav">
+<!--    <a href="${pageContext.request.contextPath}/home"><fmt:message key="menu.home"/></a>
+	    <span style="margin-left: 15px;">
+	        <a href="${pageContext.request.contextPath}/language?lang=vi" 
+	           style="color: ${sessionScope.lang == 'en' ? '#ccc' : 'yellow'}; margin:0 5px;">VN</a> 
+	        |
+	        <a href="${pageContext.request.contextPath}/language?lang=en" 
+	           style="color: ${sessionScope.lang == 'en' ? 'yellow' : '#ccc'}; margin:0 5px;">EN</a>
+	    </span>  -->	
         <a href="${pageContext.request.contextPath}//home">Trang chủ</a>
 		<a href="${pageContext.request.contextPath}/category?id=TEC">Công nghệ</a>
 		<a href="${pageContext.request.contextPath}/category?id=SPO">Thể Thao</a>
 		<a href="${pageContext.request.contextPath}/category?id=ENT">Giải trí</a>
 		<a href="${pageContext.request.contextPath}/category?id=SOC">Xã hội</a>
-        <a href="${pageContext.request.contextPath}/views/contact/contact.jsp">Liên hệ</a>
+        <a href="${pageContext.request.contextPath}/contact">Liên hệ</a>
 
         <!-- =======================
              1. CHƯA ĐĂNG NHẬP

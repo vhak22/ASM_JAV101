@@ -59,7 +59,7 @@
                               border:1px solid #ccc; border-radius:10px;">
 
                 <label style="display:flex; align-items:center; gap:8px; font-weight:600; margin:10px 0;">
-                    <input type="checkbox" name="highlight"
+                    <input type="checkbox" name="highlight" value="true"
                            <c:if test="${news.home}">checked</c:if> >
                     Hiển thị lên trang chủ
                 </label>
@@ -85,6 +85,7 @@
                 </div>
 
                 <!-- Hidden field: action -->
+                <input type="hidden" name="view" value="${news.viewCount}">
                 <input type="hidden" name="action" value="${param.action}">
                 <input type="hidden" name="id" value="${news.id}">
             </form>
