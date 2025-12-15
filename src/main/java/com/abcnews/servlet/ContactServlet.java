@@ -43,7 +43,7 @@ public class ContactServlet extends HttpServlet {
 	        response.setCharacterEncoding("utf-8");
 
 	        final String user = "khanhnguyeen2208@gmail.com";
-	        final String pass = "xzpu qbrc jvfw mrjg";
+	        final String pass = "YOUR_EMAIL_PASSWORD";
 
 	        String to = request.getParameter("to");
 	        String subject = request.getParameter("subject");
