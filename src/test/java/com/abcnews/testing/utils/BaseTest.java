@@ -133,7 +133,7 @@ public class BaseTest {
     protected void loginAs(String id, String password) {
         try {
             WebDriver driver = XDriver.getDriver(false);
-            driver.get("http://localhost:8080/PolyLab7/login");
+            driver.get("http://localhost:8080/CodeDemo/login");
             pause(800);
 
             try { driver.findElement(org.openqa.selenium.By.name("id")).clear(); } catch (Exception ignored) {}
